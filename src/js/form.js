@@ -20,8 +20,11 @@ const createTitle = () => {
 // createElement('div', { className: 'form-group' })
 
 const getCurrentTime = () => {
-  const date = new Date();
-  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  const date = new Date()
+  return date.toLocaleTimeString('fr-FR', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 }
 
 const createFormGroup = ({
@@ -125,27 +128,9 @@ const createReasonFieldset = (reasonsData) => {
   const fieldset = createElement('fieldset', fieldsetAttrs)
   const appendToFieldset = appendTo(fieldset)
 
-  const legendAttrs = {
-    className: 'legend titre-3',
-    innerHTML: 'Choisissez un motif de déplacement',
-  }
-  const legend = createElement('legend', legendAttrs)
-
-  const textAlertAttrs = {
-    className: 'msg-alert hidden',
-    innerHTML: 'Veuillez choisir un motif',
-  }
-  const textAlert = createElement('p', textAlertAttrs)
-
-  const textSubscribeReasonAttrs = {
-    innerHTML: 'certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé par le décret n°2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l\'épidémie de Covid19 dans le cadre de l\'état d\'urgence sanitaire  <a class="footnote" href="#footnote1">[1]</a>&nbsp;:',
-  }
-
-  const textSubscribeReason = createElement('p', textSubscribeReasonAttrs)
-
   const reasonsFields = reasonsData.items.map(createReasonField)
 
-  appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])
+  appendToFieldset([...reasonsFields])
   // Créer un form-checkbox par motif
   return fieldset
 }
