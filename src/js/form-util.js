@@ -33,7 +33,7 @@ const conditions = {
   },
 }
 
-function validateAriaFields () {
+function validateAriaFields() {
   return Object.keys(conditions)
     .map((field) => {
       const fieldData = conditions[field]
@@ -53,12 +53,12 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput) {
+export function setReleaseDateTime(releaseDateInput) {
   const loadedDate = new Date()
   releaseDateInput.value = getFormattedDate(loadedDate)
 }
 
-export function getProfile (formInputs) {
+export function getProfile(formInputs) {
   const fields = {}
   for (const field of formInputs) {
     let value = field.value
@@ -71,14 +71,21 @@ export function getProfile (formInputs) {
   return fields
 }
 
-export function getReasons (reasonInputs) {
+export function getReasons(reasonInputs) {
   const reasons = reasonInputs
-    .filter(input => input.checked)
-    .map(input => input.value).join(', ')
+    .filter((input) => input.checked)
+    .map((input) => input.value)
+    .join(', ')
   return reasons
 }
 
-export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar) {
+export function prepareInputs(
+  formInputs,
+  reasonInputs,
+  reasonFieldset,
+  reasonAlert,
+  snackbar
+) {
   formInputs.forEach((input) => {
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     const validitySpan = input.parentNode.parentNode.querySelector('.validity')
@@ -103,9 +110,9 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     }
   })
 
-  reasonInputs.forEach(radioInput => {
+  reasonInputs.forEach((radioInput) => {
     radioInput.addEventListener('change', function (event) {
-      const isInError = reasonInputs.every(input => !input.checked)
+      const isInError = reasonInputs.every((input) => !input.checked)
       reasonFieldset.classList.toggle('fieldset-error', isInError)
       reasonAlert.classList.toggle('hidden', !isInError)
     })
@@ -149,7 +156,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   })
 }
 
-export function prepareForm () {
+export function prepareForm() {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
   const reasonInputs = [...$$('input[name="field-reason"]')]
